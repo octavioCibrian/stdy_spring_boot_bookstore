@@ -1,7 +1,7 @@
 ```toml
 name = 'http://localhost:8080/publishers'
 method = 'POST'
-url = 'http://localhost:8080/publishers'
+url = 'http://localhost:8080/author'
 sortWeight = 1000000
 id = '3be81b7d-c0fa-4e2c-ba20-8e370c78ae05'
 
