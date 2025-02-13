@@ -12,5 +12,5 @@ public class Author {
     private String name;
     private String biography;
     @ManyToOne
-    private Publisher publiser;
+    private Publisher publisher;
 }
