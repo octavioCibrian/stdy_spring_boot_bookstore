@@ -11,5 +11,5 @@ value = 'application/json'
 
 [body]
 type = 'JSON'
-raw = '{"title": "Book title", "isbn": "12345", "authors": { "id": 1}}'
+raw = '{"title": "Book title", "isbn": "12345", "authors": [{ "id": 1}]}'
 ```
