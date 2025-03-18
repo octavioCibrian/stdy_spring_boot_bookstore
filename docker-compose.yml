@@ -15,3 +15,13 @@ services:
       - "27017:27017"
     environment:
       MONGO_INITDB_DATABASE: bookstore7017"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: octavio@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
