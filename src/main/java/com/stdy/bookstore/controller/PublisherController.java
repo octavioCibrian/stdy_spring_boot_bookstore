@@ -46,15 +46,4 @@ public class PublisherController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        if(publisherRepository.existsById(id)) {
-            publisherRepository.deleteById(id);
-
-            return ResponseEntity.ok().build();
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-
 }
