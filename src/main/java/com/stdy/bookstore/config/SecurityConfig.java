@@ -19,7 +19,9 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authz -> authz.requestMatchers("/login").permitAll().anyRequest().authenticated())
-            .httpBasic(Customizer.withDefaults());
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+
+
 
         return http.build();
     }
