@@ -2,6 +2,7 @@ package com.stdy.bookstore.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,8 +19,17 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(authz -> authz.requestMatchers("/login").permitAll().anyRequest().authenticated())
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+            .authorizeHttpRequests(authz -> authz.requestMatchers("/login").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/books", "/authors")
+                    .hasAnyAuthority("ROLE_ADMIN")
+
+                    .requestMatchers(HttpMethod.GET, "/books/**", "/reviews/**", "/authors/**")
+                    .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                    .anyRequest().authenticated()
+
+            )
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt ->
+                    jwt.jwtAuthenticationConverter(new KeycloakRoleConverter())));
 
 
 
